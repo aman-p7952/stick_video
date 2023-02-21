@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import requests
 from pydantic import BaseModel
-
+from video import video
 app = FastAPI()
 
 class Ex_id(BaseModel):
@@ -15,4 +15,6 @@ def stick_video_generator(ex_id:Ex_id):
     res = requests.get(f"http://api-stage.sportyapp.gg/exercises/{ex_id.ex_id}")
     datastream = res.json()
     print(datastream)
+    video(ex_id.ex_id,datastream)
     return "aman"
+
